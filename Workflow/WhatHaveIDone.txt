@@ -1,0 +1,14 @@
+1. WillToWinPrediction.ipynb & Jun 26 Update.pdf
+
+A skeleton of the strategy for trainer's will to win prediction. The algorithm I used is K-NN.
+Since I haven't gotten enough knowledge to selecting factors as trainer's sentiment. The project is incomplete.
+
+2. BettingUsingProbHDWPSRRating.ipynb
+
+A performance test on HDWPSRRating probability strategy via Haville.py. The measure I used are prediction precision and historical PnL.
+Here I tested both win and exacta, and with different conditions on pool size (EX_pool>TR_pool and vice versa).
+
+3. probOddsPoolStrategy.ipynb
+
+The task assigned today, unfinished. I am still stuck with the data. There is no odds information, and I don't know what is "pool_type" means.
+Please check the notebook, there is something I thought might save your time. Wish you good luck!!!
