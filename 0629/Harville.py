@@ -57,7 +57,12 @@ def harville_multiprob(id, win_probs, bet_type, alpha=1.0, beta=1.0, sigma=1.0):
     sump = sum(win_probs)
     prob = [x/sump for x in win_probs]# in case probs are not normalized
     M = []
-    if bet_type == 'Exacta':#exacta
+    if bet_type == 'Win':
+        for i in range(n):
+            p1 = prob[i]
+            row = [id[i], p1]
+            M.append(row)
+    elif bet_type == 'Exacta':#exacta
         for i in range(n):
             for j in range(n):
                 if i!=j:
@@ -108,31 +113,32 @@ def harville_multiprob(id, win_probs, bet_type, alpha=1.0, beta=1.0, sigma=1.0):
     M.sort(key=itemgetter(-1),reverse=True)
     return M
 
-def harville_box(id, win_probs, bet_type, alpha=1.0, beta=1.0, sigma=1.0):
-    '''
-    to calculate box combination probability
-    :param id: horse/runner place in a race, like 1, 2, 3...
-    :param win_probs: the prob of win of the corresponding id
-    :param bet_type: bet type, can be 'Exacta', 'Trifacta', 'Superfecta'
-    :param alpha: parameter in discounted Harvlle formula
-    :param beta: parameter in discounted Harvlle formula
-    :param sigma: parameter in discounted Harvlle formula
-    :return:2-d list, for each row, last element is the prob that combination win, first elements are id combination. It is ranked decending according to prob
-    '''
-    n = len(id);
-    sump = sum(win_probs)
-    prob = [x/sump for x in win_probs]# in case probs are not normalized
-    M = [];
-    if bet_type == 'Exacta':#exacta
-        for i in range(n):
-            for j in range((i+1),n):
-                p1 = prob[i]
-                p2 = prob[j]
-                row = [id[i], id[j], p1 * Q2(p1, p2, prob, alpha) + p2 * Q2(p2, p1, prob, alpha)]
-                M.append(row)
+# move to bet_type = "Quinella"
+# def harville_box(id, win_probs, bet_type, alpha=1.0, beta=1.0, sigma=1.0):
+#     '''
+#     to calculate box combination probability
+#     :param id: horse/runner place in a race, like 1, 2, 3...
+#     :param win_probs: the prob of win of the corresponding id
+#     :param bet_type: bet type, can be 'Exacta', 'Trifacta', 'Superfecta'
+#     :param alpha: parameter in discounted Harvlle formula
+#     :param beta: parameter in discounted Harvlle formula
+#     :param sigma: parameter in discounted Harvlle formula
+#     :return:2-d list, for each row, last element is the prob that combination win, first elements are id combination. It is ranked decending according to prob
+#     '''
+#     n = len(id);
+#     sump = sum(win_probs)
+#     prob = [x/sump for x in win_probs]# in case probs are not normalized
+#     M = [];
+#     if bet_type == 'Exacta':#exacta
+#         for i in range(n):
+#             for j in range((i+1),n):
+#                 p1 = prob[i]
+#                 p2 = prob[j]
+#                 row = [id[i], id[j], p1 * Q2(p1, p2, prob, alpha) + p2 * Q2(p2, p1, prob, alpha)]
+#                 M.append(row)
 
-    else:
-        print('bet type unknown')
-        return None
-    M.sort(key=itemgetter(-1),reverse=True)
-    return M
+#     else:
+#         print('bet type unknown')
+#         return None
+#     M.sort(key=itemgetter(-1),reverse=True)
+#     return M
